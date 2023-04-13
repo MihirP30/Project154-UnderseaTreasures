@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+        <script src="diver.js"></script>
+        <script src="terrain.js"></script>
+        <script src="bubbles.js"></script>
+        <script src="fish.js"></script>
+        <script src="coin.js"></script>
+    </head>
+    <body>
+        <a-scene renderer="colorManagement: true;">
+            <!--Camera-->
+            <a-entity 
+                camera
+                position="0 15 10"
+                rotation="-35 0 0"
+            ></a-entity>
+
+            <a-assets timeout="10000">
+                <a-asset-item
+                    id="diver-obj"
+                    src="./assets/Diver/tinker.obj"
+                ></a-asset-item>
+                <a-asset-item
+                    id="diver-mtl"
+                    src="./assets/Diver/obj.mtl"
+                ></a-asset-item>
+
+                <a-asset-item
+                    id="island-obj"
+                    src="./assets/Island/tinker.obj"
+                ></a-asset-item>
+                <a-asset-item
+                    id="island-mtl"
+                    src="./assets/Island/obj.mtl"
+                ></a-asset-item>
+        
+                <a-asset-item
+                    id="bubble-obj"
+                    src="./assets/Bubbles/tinker.obj"
+                ></a-asset-item>
+                <a-asset-item
+                    id="bubble-mtl"
+                    src="./assets/Bubbles/obj.mtl"
+                ></a-asset-item>
+            </a-assets>
+
+            <!--Sky-->
+            <a-sky src="./assets/background.png"></a-sky>
+            
+            <!--Ocean-->
+            <a-entity
+                id="ocean"
+                position="0 -75 -50"
+                rotation="-90 0 0"
+                animation="property:position; to: 0 -75 50; loop:true; easing:linear; dur: 15000"
+                obj-model="obj:#island-obj; mtl:#island-mtl"
+                terrain
+                fish
+                coin
+            ></a-entity>
+
+            <!--Bubbles-->
+            <a-entity
+                id="bubbles"
+                position="0 -5 -10"
+                rotation="-90 180 0"
+                obj-model="obj:#bubble-obj; mtl:#bubble-mtl"
+                scale="0.05 0.05 0.05"
+                animate-bubbles
+            ></a-entity>
+
+            <!--Diver-->
+            <a-entity
+                id="diver"
+                position="0 0 0"
+                rotation="-20 180 0"
+                obj-model="obj:#diver-obj; mtl:#diver-mtl"
+                scale="0.125 0.125 0.125"
+                rotate-diver
+            ></a-entity>
+        </a-scene>
+    </body>
+</html>
